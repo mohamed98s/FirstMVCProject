@@ -21,8 +21,8 @@ namespace Company.Web
             });
 
 
-            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IGenericRepository<Employee>, GenericRepository<Employee>>();
             builder.Services.AddScoped<IGenericRepository<Department>, GenericRepository<Department>>();
 
