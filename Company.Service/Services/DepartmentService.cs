@@ -50,7 +50,18 @@ namespace Company.Service.Services
 
 		public void Update(Department entity)
 		{
-			throw new NotImplementedException();
+			var dept  = GetById(entity.Id);
+			if (dept.name == entity.name)
+			{
+				if (GetAll().Any(x=>x.name == entity.name))
+				{
+					throw new Exception("name already exist");
+				}
+			}
+			dept.name = entity.name;
+			dept.Code = entity.Code;
+			_departmentRepository.Update(dept);
+
 		}
 	}
 }

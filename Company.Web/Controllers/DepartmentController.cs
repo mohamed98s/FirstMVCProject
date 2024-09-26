@@ -1,4 +1,5 @@
-﻿using Company.Data.Models;
+﻿using System.Reflection.Metadata.Ecma335;
+using Company.Data.Models;
 using Company.Repository.Interfaces;
 using Company.Service.Interfaces;
 using Company.Service.Services;
@@ -45,15 +46,31 @@ namespace Company.Web.Controllers
 
 			}
 		}
-
-		public IActionResult Details(int id)
+		[HttpGet]
+		public IActionResult Details(int? id, string viewname = "Details")
 		{
 			var dept = _departmentService.GetById(id);
 			if(dept is null)
 			{
 				return NotFound();
 			}
-			return View(dept);
+			return View(viewname, dept);
+		}
+		[HttpGet]
+		public IActionResult Update(int? id) 
+		{
+			return Details(id, "Update");	
+		}
+		[HttpPost]
+		public IActionResult Update(int? id, Department department)
+		{
+			if(department.Id != id.Value)
+			{
+				return RedirectToAction("PAGE NOT FOUND", null, "Home");
+			}
+			_departmentService.Update(department);
+			return RedirectToAction(nameof(Index));
+
 		}
 	}
 }
