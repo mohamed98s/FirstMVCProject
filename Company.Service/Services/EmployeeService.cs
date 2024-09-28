@@ -20,17 +20,20 @@ namespace Company.Service.Services
 
         public void Add(Employee entity)
         {
-            
-            _unitOfWork.employeeRepository.Add(entity);
-           
-        }
+			Console.WriteLine("Adding employee to database");
+			_unitOfWork.employeeRepository.Add(entity);
+			_unitOfWork.Complete();
 
-        public void Delete(Employee entity)
+		}
+
+		public void Delete(Employee entity)
         {
             _unitOfWork.employeeRepository.Delete(entity);
-        }
+			_unitOfWork.Complete();
 
-        public IEnumerable<Employee> GetAll()
+		}
+
+		public IEnumerable<Employee> GetAll()
         {
             var dept = _unitOfWork.employeeRepository.GetAll().Where(x => x.IsDeleted != true);
             return dept;
