@@ -1,4 +1,5 @@
 ﻿using Company.Data.Models;
+using Company.Service.Dto;
 using Company.Service.Interfaces;
 using Company.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace Company.Web.Controllers
 			_departmentService = departmentService;
 		}
 
-        [HttpGet]
+       
 		public IActionResult Index(string searchInp)
         {
             if (string.IsNullOrEmpty(searchInp))
@@ -35,17 +36,14 @@ namespace Company.Web.Controllers
         public IActionResult Create()
         {
             ViewBag.Departments = _departmentService.GetAll();
+
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeDto employee)
         {
-			Console.WriteLine("Received Employee data:");
-			Console.WriteLine("DepartmentId: " + employee.DepartmentId);
-			Console.WriteLine("DepartmentName: " + employee.Department);
-
 			try
-			{
+            {
 				if (ModelState.IsValid)
                 {
 					Console.WriteLine("Model is valid. Proceeding to add employee...");
@@ -53,11 +51,14 @@ namespace Company.Web.Controllers
 					_employeeService.Add(employee);
                     return RedirectToAction(nameof(Index));
                 }
-                else
+                if (!ModelState.IsValid)
                 {
-					Console.WriteLine("Model is not valid.");
-
-				}
+                    var errors = ModelState.Values.SelectMany(v => v.Errors);
+                    foreach (var error in errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
 				ViewBag.Departments = _departmentService.GetAll();
 
 				ModelState.AddModelError("EmployeeError", "ValidationErrors");

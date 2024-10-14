@@ -5,11 +5,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Company.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.Data.Contexts
 {
-    public class CompanyDbContext : DbContext
+    public class CompanyDbContext : IdentityDbContext
     {
         public CompanyDbContext(DbContextOptions options) : base(options)
         {
@@ -27,5 +28,6 @@ namespace Company.Data.Contexts
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
