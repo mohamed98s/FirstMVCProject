@@ -24,6 +24,6 @@ namespace Company.Service.Dto
 		public string? ImgUrl { get; set; }
         public DepartmentDto? Department { get; set; }
         public int? DepartmentId { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now; 
     }
 }
