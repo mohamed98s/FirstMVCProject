@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using Company.Data.Models;
 using Company.Repository.Interfaces;
+using Company.Service.Dto;
 using Company.Service.Interfaces;
 using Company.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace Company.Web.Controllers
 			return View();
 		}
 		[HttpPost]
-		public IActionResult Create(Department department)
+		public IActionResult Create(DepartmentDto department)
 		{
 			try
 			{
@@ -62,7 +63,7 @@ namespace Company.Web.Controllers
 			return Details(id, "Update");	
 		}
 		[HttpPost]
-		public IActionResult Update(int? id, Department department)
+		public IActionResult Update(int? id, DepartmentDto department)
 		{
 			if(department.Id != id.Value)
 			{

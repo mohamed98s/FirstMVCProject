@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Company.Data.Models;
+using Company.Service.Dto;
 
 namespace Company.Service.Interfaces
 {
-	public interface IDepartmentService
+    public interface IDepartmentService
 	{
-		Department GetById(int? id);
+		DepartmentDto GetById(int? id);
 		IEnumerable<Department> GetAll();
-		void Add(Department entity);
-		void Update(Department entity);
-		void Delete(Department entity);
+		void Add(DepartmentDto entity);
+		void Update(DepartmentDto entity);
+		void Delete(DepartmentDto entity);
 	}
 }

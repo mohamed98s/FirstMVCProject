@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Employee>
+﻿@model IEnumerable<EmployeeDto>
 
 <h1>All Employees</h1>
 
@@ -15,7 +15,7 @@
     </form>
 </div>
 
-@if (Model.Count() > 0)
+@if (Model.Any())
 {
     <table class="table table-striped table-hover">
         <thead>
@@ -38,6 +38,9 @@
             {
                 <tr>
                     <td>@Employee.Name</td>
+                    <td>
+                        <img src="~/Files/Imgs/@Employee.ImgUrl" height="40" width="40"/>
+                    </td>
                     <td>@Employee.Age</td>
                     <td>@Employee.Address</td>
                     <td>@Html.DisplayFor(M => Employee.Salary)</td>
